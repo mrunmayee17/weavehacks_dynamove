@@ -2,13 +2,12 @@
 import os, httpx
 from google.adk.tools import FunctionTool
 
-EXA_API_KEY = os.getenv("EXA_API_KEY")
-EXA_ENDPOINT = "https://api.exa.ai/search"
-
 def exa_search(query: str, k: int) -> str:
     """
     Returns a markdown bullet list of search hits with full content.
     """
+    EXA_API_KEY = os.environ.get("EXA_API_KEY")
+    EXA_ENDPOINT = "https://api.exa.ai/search"  
     if not EXA_API_KEY:
         raise RuntimeError("Set EXA_API_KEY env-var first")
 

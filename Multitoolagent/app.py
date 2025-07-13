@@ -243,9 +243,9 @@ def _update_user_contact(new_contact: dict):
             st.session_state.user_contact[key] = value
 
 # ── 3. Streamlit front-end ----------------------------------------------------
-st.set_page_config(page_title="🍽️ Restaurant Booking Assistant", page_icon="🍽️", layout="wide")
+st.set_page_config(page_title="Dynamove: Your driving concierge", page_icon="🍽️", layout="wide")
 
-st.title("🍽️ Restaurant Booking Assistant")
+st.title("Dynamove: Your driving concierge")
 st.caption("**Voice-powered restaurant search, real reservation booking, and Gmail access** • Powered by Exa + BrowserBase + Gmail API")
 
 # Initialize session state for user contact
