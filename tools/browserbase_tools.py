@@ -1,8 +1,19 @@
 import asyncio
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 from google.adk.tools import FunctionTool
 import httpx
 import json
+
+# Load environment variables from .env.prod using absolute path
+dotenv_path = Path(__file__).parent.parent / ".env.prod"
+load_dotenv(dotenv_path)
+
+# Set environment variables explicitly
+os.environ["BROWSERBASE_API_KEY"] = os.getenv("BROWSERBASE_API_KEY")
+os.environ["BROWSERBASE_PROJECT_ID"] = os.getenv("BROWSERBASE_PROJECT_ID")
+os.environ["EXA_API_KEY"] = os.getenv("EXA_API_KEY")
 
 # Check if optional dependencies are available
 try:
@@ -123,6 +134,12 @@ def book_restaurant_reservation_real(
     Returns:
         String with booking status and confirmation details
     """
+    # Debug prints for environment and context
+    print("[DEBUG] CWD:", os.getcwd())
+    print("[DEBUG] __file__:", __file__)
+    print("[DEBUG] BROWSERBASE_API_KEY:", os.getenv('BROWSERBASE_API_KEY'))
+    print("[DEBUG] BROWSERBASE_PROJECT_ID:", os.getenv('BROWSERBASE_PROJECT_ID'))
+    print("[DEBUG] EXA_API_KEY:", os.getenv('EXA_API_KEY'))
     
     # Check if dependencies are available
     if not PLAYWRIGHT_AVAILABLE:

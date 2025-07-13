@@ -27,6 +27,9 @@ os.environ["BROWSERBASE_API_KEY"] = os.getenv("BROWSERBASE_API_KEY")
 os.environ["BROWSERBASE_PROJECT_ID"] = os.getenv("BROWSERBASE_PROJECT_ID")
 os.environ["EXA_API_KEY"] = os.getenv("EXA_API_KEY")
 
+# Note: Gmail API uses OAuth2 with credentials.json and token.json files
+# These should be placed in the project root directory
+
 @st.cache_resource
 def init_services():
     sess_service = InMemorySessionService()
@@ -207,7 +210,7 @@ def _update_user_contact(new_contact: dict):
 st.set_page_config(page_title="🍽️ Restaurant Booking Assistant", page_icon="🍽️", layout="wide")
 
 st.title("🍽️ Restaurant Booking Assistant")
-st.caption("**Voice-powered restaurant search and real reservation booking** • Powered by Exa + BrowserBase")
+st.caption("**Voice-powered restaurant search, real reservation booking, and Gmail access** • Powered by Exa + BrowserBase + Gmail API")
 
 # Initialize session state for user contact
 if 'user_contact' not in st.session_state:
@@ -280,11 +283,20 @@ with st.sidebar:
     else:
         st.error("❌ Exa Search: Not configured")
     
+    # Check if Gmail credentials are available
+    gmail_configured = os.path.exists("credentials.json")
+    if gmail_configured:
+        st.success("✅ Gmail API: Email access enabled")
+    else:
+        st.warning("⚠️ Gmail API: credentials.json not found")
+    
     st.header("🎯 Capabilities")
     st.info("""
     **🔍 Search:** Find restaurants, reviews, and information
     
     **📅 Book:** Make real reservations with browser automation
+    
+    **📧 Gmail:** Read latest emails and search inbox
     
     **🎥 Verify:** Get session replay links as proof
     
@@ -304,6 +316,10 @@ with st.sidebar:
     
     "Search for Italian restaurants 
     with good reviews"
+    
+    "Show me my latest emails"
+    
+    "Search for emails from john@example.com"
     """)
 
 # Main content area
@@ -433,4 +449,4 @@ if send_text and text_input:
 
 # Footer
 st.markdown("---")
-st.markdown("**🔧 Powered by:** Exa Search • BrowserBase Automation • Google ADK • Streamlit") 
+st.markdown("**🔧 Powered by:** Exa Search • BrowserBase Automation • Gmail API • Google ADK • Streamlit") 
