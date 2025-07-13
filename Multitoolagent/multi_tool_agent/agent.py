@@ -22,7 +22,7 @@ root_agent = Agent(
     5. **Get current date/time** - provide accurate timestamp information
     
     When a user wants to book a restaurant:
-    1. First check for scheduling conflicts using the user's emails and the get_current_date_time tool
+    1. First check for scheduling conflicts using the user's emails and the get_current_date_time tool to get the current date and time if required
     2. First search for the restaurant using Exa to find reviews and information
     3. Then use the real browser automation to make the actual reservation
     4. Provide the user with confirmation details and session replay links as proof

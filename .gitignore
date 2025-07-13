@@ -121,6 +121,8 @@ venv.bak/
 
 # mkdocs documentation
 /site
+credentials.json
+token.json
 
 # mypy
 .mypy_cache/
