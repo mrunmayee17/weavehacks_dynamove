@@ -48,6 +48,19 @@ def book_restaurant_reservation_real(
     party_size: int,
     contact_info: str
 ) -> str:
+    """
+    Book a restaurant reservation using browser automation. Requires restaurant name, date, time, party size, and contact info.
+    
+    Args:
+        restaurant_name: Name of the restaurant
+        date: Date of the reservation (e.g. 'July 21, 2025')
+        time: Time of the reservation (e.g. '7:00 PM')
+        party_size: Number of people for the reservation
+        contact_info: User's contact info (email or phone)
+    
+    Returns:
+        String with booking status and confirmation details
+    """
     print(f"DEBUG: Called with restaurant_name={restaurant_name}, date={date}, time={time}, party_size={party_size}, contact_info={contact_info}")
     # Check for missing info
     missing = []
@@ -187,20 +200,6 @@ Please try booking manually or provide a direct reservation link.
 Please try again or book manually.
 """
 
-book_restaurant_reservation_real = FunctionTool(
-    book_restaurant_reservation_real,
-    name="book_restaurant_reservation_real",
-    description="Book a restaurant reservation using browser automation. Requires restaurant name, date, time, party size, and contact info.",
-    parameters={
-        "type": "object",
-        "properties": {
-            "restaurant_name": {"type": "string", "description": "Name of the restaurant"},
-            "date": {"type": "string", "description": "Date of the reservation (e.g. 'July 21, 2025')"},
-            "time": {"type": "string", "description": "Time of the reservation (e.g. '7:00 PM')"},
-            "party_size": {"type": "integer", "description": "Number of people for the reservation"},
-            "contact_info": {"type": "string", "description": "User's contact info (email or phone)"},
-        },
-        "required": ["restaurant_name", "date", "time", "party_size", "contact_info"],
-    }
-)
+# Create the FunctionTool
+book_restaurant_reservation_real = FunctionTool(book_restaurant_reservation_real)
 navigate_and_extract = FunctionTool(navigate_and_extract)

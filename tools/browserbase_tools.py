@@ -103,19 +103,6 @@ Restaurant: {restaurant_name}
 **Action:** Try booking manually or contact restaurant
 """
 
-@FunctionTool(
-    parameters={
-        "type": "object",
-        "properties": {
-            "restaurant_name": {"type": "string", "description": "Name of the restaurant"},
-            "date": {"type": "string", "description": "Date of the reservation (e.g. 'July 21, 2025')"},
-            "time": {"type": "string", "description": "Time of the reservation (e.g. '7:00 PM')"},
-            "party_size": {"type": "integer", "description": "Number of people for the reservation"},
-            "contact_info": {"type": "string", "description": "User's contact info (email or phone)"},
-        },
-        "required": ["restaurant_name", "date", "time", "party_size", "contact_info"],
-    }
-)
 def book_restaurant_reservation_real(
     restaurant_name: str,
     date: str,
@@ -124,7 +111,17 @@ def book_restaurant_reservation_real(
     contact_info: str
 ) -> str:
     """
-    Actually book a restaurant reservation using real browser automation via BrowserBase.
+    Book a restaurant reservation using browser automation. Requires restaurant name, date, time, party size, and contact info.
+    
+    Args:
+        restaurant_name: Name of the restaurant
+        date: Date of the reservation (e.g. 'July 21, 2025')
+        time: Time of the reservation (e.g. '7:00 PM')
+        party_size: Number of people for the reservation
+        contact_info: User's contact info (email or phone)
+    
+    Returns:
+        String with booking status and confirmation details
     """
     
     # Check if dependencies are available
@@ -414,3 +411,7 @@ Restaurant: {restaurant_name}
 **Status:** FAILED - Technical error
 **Action:** Check your BrowserBase setup and try again
 """
+
+# Create the FunctionTool
+book_restaurant_reservation_real = FunctionTool(book_restaurant_reservation_real)
+navigate_and_extract = FunctionTool(navigate_and_extract)
